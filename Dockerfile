@@ -36,15 +36,7 @@ RUN mkdir -p $CATALINA_HOME && \
     tar xfz /tmp/tomcat.tar.gz -C $CATALINA_HOME --strip-components=1 && \
     rm /tmp/tomcat.tar.gz
     RUN mv /tmp/tomcat/* /opt/tomcat/.
-
-
-    # Set up Maven
-ARG MAVEN_VERSION=3.6.3
-ENV MAVEN_HOME /usr/share/maven
-ENV PATH $MAVEN_HOME/bin:$PATH
-RUN curl -fsSL "http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" \
-    | tar -xzC /usr/share/maven --strip-components=1
-
+    
 # Set up Tomcat
 ARG TOMCAT_MAJOR_VERSION=9
 ARG TOMCAT_MINOR_VERSION=9.0.87
@@ -53,7 +45,8 @@ ENV PATH $CATALINA_HOME/bin:$PATH
 WORKDIR $CATALINA_HOME
 RUN curl -OL "https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_MINOR_VERSION/bin/apache-tomcat-$TOMCAT_MINOR_VERSION.tar.gz" \
     && tar -zxf "apache-tomcat-$TOMCAT_MINOR_VERSION.tar.gz" \
-    && mv "apache-tomcat-$TOMCAT_MINOR_VERSION"/* .
+    && mv "apache-tomcat-$TOMCAT_MINOR_VERSION"/* . \
+    && rm "apache-tomcat-$TOMCAT_MINOR_VERSION.tar.gz"
     
 # Create a user and group for Tomcat
 RUN groupadd -r tomcat && \
