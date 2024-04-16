@@ -25,7 +25,7 @@ ENV CATALINA_HOME /usr/share/tomcat
 ENV CATALINA_BASE /var/lib/tomcat
 
 # Create a user and group for Tomcat
-RUN useradd -r -m -U -d $CATALINA_HOME -s /bin/false -g tomcat tomcat && \
+RUN useradd -r -m -d /usr/share/tomcat -s /bin/false -g tomcat tomcat && \
     chown -R tomcat:tomcat /usr/share/tomcat && \
     chown -R tomcat:tomcat /var/lib/tomcat
 
