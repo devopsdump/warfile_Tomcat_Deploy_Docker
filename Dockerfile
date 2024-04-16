@@ -23,19 +23,6 @@ RUN mkdir -p $MAVEN_HOME \
     && curl -fsSL "https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz" \
     | tar -xzC $MAVEN_HOME --strip-components=1 \
     && ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn
-
-# Set up Tomcat
-ENV TOMCAT_MAJOR_VERSION 9
-ENV TOMCAT_VERSION 9.0.87
-ENV CATALINA_HOME /opt/tomcat
-ENV PATH $CATALINA_HOME/bin:$PATH
-
-# Download and extract Tomcat
-RUN mkdir -p $CATALINA_HOME && \
-    wget -q https://dlcdn.apache.org/tomcat/tomcat-9/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -O /tmp/tomcat.tar.gz && \
-    tar xfz /tmp/tomcat.tar.gz -C $CATALINA_HOME --strip-components=1 && \
-    rm /tmp/tomcat.tar.gz
-    RUN mv /tmp/tomcat/* /opt/tomcat/.
     
 # Set up Tomcat
 ARG TOMCAT_MAJOR_VERSION=9
