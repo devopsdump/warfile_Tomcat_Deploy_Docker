@@ -31,7 +31,10 @@ RUN groupadd -r tomcat && \
     chown -R tomcat:tomcat $CATALINA_HOME
 
 # Add Tomcat manager app configuration
-ADD tomcat-users.xml $CATALINA_HOME/conf/
+#ADD tomcat-users.xml $CATALINA_HOME/conf/
+COPY ./conf_files/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY ./conf_files/context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
+
 
 # Download the war file
 WORKDIR $CATALINA_HOME/webapps
