@@ -13,10 +13,10 @@ RUN mkdir /opt/tomcat/
 
 WORKDIR /opt/tomcat
 ADD apache-tomcat-9.0.87.tar.gz /opt/tomcat
-#RUN tar xvfz apache*.tar.gz
-RUN mv  apache-tomcat-9.0.87/* /opt/tomcat/.
-RUN yum -y install java
-RUN java -version
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-9.0.87/* /opt/tomcat/.
+RUN apt-get install openjdk-11-jdk
+RUN java --version
 #RUN echo "JAVA_HOME=/opt/java-1.8.0-openjdk/" >> /etc/default/tomcat8
 #RUN groupadd tomcat
 #RUN useradd -s /bin/bash -g tomcat tomcat
