@@ -7,8 +7,7 @@ RUN apt-get -y update && \
  apt-get -y install wget && \
  apt-get -y install tar && \
  apt-get -y install sudo && \
- apt-get -y install curl \
- rm -rf /var/lib/apt/lists/*
+ apt-get -y install curl 
  
 #Tomcat
 RUN mkdir /opt/tomcat/
