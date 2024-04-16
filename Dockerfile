@@ -3,7 +3,8 @@ From ubuntu:latest
 Maintainer devopsdump/chandrika
 
 # Install prepare infrastructure
-RUN apt-get -y update && \
+RUN groupadd tomcat && \
+ apt-get -y update && \
  apt-get -y install wget && \
  apt-get -y install tar && \
  apt-get -y install sudo && \
@@ -23,11 +24,16 @@ RUN java --version
 ENV CATALINA_HOME /usr/share/tomcat
 ENV CATALINA_BASE /var/lib/tomcat
 
+# Create a user and group for Tomcat
+RUN useradd -r -m -U -d $CATALINA_HOME -s /bin/false -g tomcat tomcat && \
+    chown -R tomcat:tomcat /usr/share/tomcat && \
+    chown -R tomcat:tomcat /var/lib/tomcat
+
 # Create a user for Tomcat (optional but recommended for security)
 RUN chgrp -R tomcat /var/lib/tomcat && \
     chmod -R g+r /var/lib/tomcat/conf && \
     chmod g+x /var/lib/tomcat/conf && \
-    chown -R tomcat /var/lib/tomcat/webapps/ /var/lib/tomcat/logs/ /var/lib/tomcat9/temp/ /var/lib/tomcat/work/
+    chown -R tomcat /var/lib/tomcat/webapps/ /var/lib/tomcat/logs/ /var/lib/tomcat/temp/ /var/lib/tomcat/work/
 
     # Add manager app configuration
    ADD tomcat-users.xml /opt/tomcat/conf/
