@@ -25,7 +25,7 @@ RUN java -version
 
 
 WORKDIR /opt/tomcat/webapps
-RUN curl -O -L https://github.com/beardbytes/JavaCRUDRestWS/tree/master/dist/MyWebsite.war
+RUN curl -O -L https://github.com/devopsdump/warfile_Tomcat_Deploy_Docker/blob/main/Lab6A.war
 
 EXPOSE 8080
 
