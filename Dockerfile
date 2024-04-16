@@ -20,7 +20,7 @@ ENV MAVEN_HOME /usr/share/maven
 ENV PATH $MAVEN_HOME/bin:$PATH
 VOLUME /root/.m2
 RUN mkdir -p $MAVEN_HOME \
-    && curl -fsSL "https://downloads.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" \
+    && curl -fsSL "https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" \
     | tar -xzC $MAVEN_HOME --strip-components=1 \
     && ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn
 
