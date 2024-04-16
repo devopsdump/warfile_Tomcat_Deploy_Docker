@@ -35,7 +35,7 @@ RUN mkdir -p $CATALINA_HOME && \
     wget -q https://dlcdn.apache.org/tomcat/tomcat-9/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -O /tmp/tomcat.tar.gz && \
     tar xfz /tmp/tomcat.tar.gz -C $CATALINA_HOME --strip-components=1 && \
     rm /tmp/tomcat.tar.gz
-    RUN mv apache-tomcat-8.5.54/* /opt/tomcat/.
+    RUN mv apache-tomcat-9.0.87/* /opt/tomcat/.
 
 
     # Set up Maven
