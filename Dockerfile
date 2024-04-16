@@ -14,15 +14,15 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV MAVEN_VERSION 3.6.3
-RUN mkdir -p /usr/share/maven \
-	&& curl -fsSL  https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
-	| tar -xzC /usr/share/maven --strip-components=1 \
-	&& ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
-
+# Set up Maven
+ARG MAVEN_VERSION=3.6.3
 ENV MAVEN_HOME /usr/share/maven
+ENV PATH $MAVEN_HOME/bin:$PATH
 VOLUME /root/.m2
-
+RUN mkdir -p $MAVEN_HOME \
+    && curl -fsSL "https://downloads.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" \
+    | tar -xzC $MAVEN_HOME --strip-components=1 \
+    && ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn
 
 # Set up Tomcat
 ENV TOMCAT_MAJOR_VERSION 9
